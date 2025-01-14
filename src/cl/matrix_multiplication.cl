@@ -94,7 +94,7 @@ __kernel void matrix_multiplication_local_wpt(
     for (int tile_start = 0; tile_start < (K + TILE_SIZE - 1) / TILE_SIZE; tile_start++) {
         for (int w = 0; w < WORK_PER_THREAD; w++) {
             tile_a[local_j * WORK_PER_THREAD + w][local_i] = as[(tile_start * TILE_SIZE + local_i) + (j * WORK_PER_THREAD + w) * K];
-            tile_b[local_j * WORK_PER_THREAD + w][local_i] = bs[(local_i) + (tile_start * TILE_SIZE + local_j * WORK_PER_THREAD + w) * N];
+            tile_b[local_j * WORK_PER_THREAD + w][local_i] = bs[(i) + (tile_start * TILE_SIZE + local_j * WORK_PER_THREAD + w) * N];
         }
 
         barrier(CLK_LOCAL_MEM_FENCE);
